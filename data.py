@@ -10,7 +10,6 @@ from yellowbrick.cluster import KElbowVisualizer
 from src.agstyler import *
 from st_aggrid import AgGrid
 from llama_index.core import VectorStoreIndex,SimpleDirectoryReader,ServiceContext
-# from llama_index.llms import openai
 
 from llama_index.llms.openai import OpenAI
 import os
