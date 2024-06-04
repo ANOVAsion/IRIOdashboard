@@ -11,6 +11,7 @@ from src.agstyler import *
 from llama_index.core import VectorStoreIndex,SimpleDirectoryReader,ServiceContext
 # from llama_index.llms import openai
 from llama_index.llms.openai import OpenAI
+import os
 
 ## LOAD DATA
 df_pdrb = pr.read_r("data/data_pdrb.rds")[None]

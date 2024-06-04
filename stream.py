@@ -68,7 +68,7 @@ if page == 'clust':
 if page == 'chat':
     st.header('Chatbot IRIO Indonesia')
     
-    api_key = OpenAI(api_key = st.secrets['OPENAI_API_KEY'])
+    api_key = OpenAI(api_key = os.getenv['OPENAI_API_KEY'])
     @st.cache_resource(show_spinner=False)
     def load_data():
         with st.spinner(text="Loading and indexing the Streamlit docs – hang tight! This should take 1-2 minutes."):
