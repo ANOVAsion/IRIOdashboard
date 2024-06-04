@@ -19,7 +19,7 @@ menu_data = [
     {'id': 'eksim', 'label':'Ekspor-Impor'},
     {'id': 'flbl', 'label':'Forward-Backward Linkage'},
     {'id': 'simul', 'label':'Simulasi Pengganda'},
-    {'id': 'clust', 'label':'Model Segmentasi'},
+    {'id': 'clust', 'label':'Model Klasterisasi'},
     {'id': 'chat', 'label':'Chatbot'}    
 ]
 
@@ -37,8 +37,28 @@ page = hc.nav_bar(
 if page == 'home':
     st.header('Introduction to The Project')
     
-    
-    
+    home_col1a, home_col1b, home_col1c = st.columns([5,1,10])
+    with home_col1a:
+        'Selamat datang di **Dashboard Tabel IO 2016** oleh **ANOVAsion Team**!'
+        '''Tabel IO merupakan tools yang menjelaskan aliran transaksi barang dan jasa antar wilayah provinsi dan sektor ekonomi, di mana selain bermanfaat untuk mengetahui karakteristik ekonomi juga berfungsi untuk menentukan kebijakan ekonomi. Tabel IO dapat digunakan untuk melihat wilayah dan sektor ekonomi mana yang harus diatensi, serta wilayah dan sektor ekonomi mana yang menjadi unggulan di suatu negara.'''
+        ' '
+        'Beberapa analisis pada dashboard ini antara lain'
+        '- Analisis deskriptif visualisasi tabel IO, meliputi: analisis PDRB menurut sektor, analisis supply dan demand, analisis struktur output, dll;'
+        '- Analisis keterkaitan, meliputi: keterkaitan antar sektor dalam perekonomian, backward linkage, forward linkage, dan sektor unggulan;'
+        '- Analisis Multiplier Effect, meliputi: analisis pengganda output pendapatan, dan tenaga kerja;'
+        '- Analisis Machine Learning untuk aglomerasi dan klustering sektor usaha dari wilayah provinsi di Indonesia; serta'
+        '- Fitur chatbot yang memudahkan Bank Indonesia dalam menentukan kebijakan moneter terkait pengembangan ekonomi digital dan keuangan berbasis indikator ekonomi makro sektoral tersebut.'
+        
+    with home_col1c:
+        'Detail informasi dari masing-masing tab pada Dashboard Tabel IO ini aadalah sebagai berikut:'
+        st.info('**Home**: Berisi informasi umum dari fitur-fitur yang tersedia dalam dashboard.')
+        st.info('**About**: Berisi informasi umum dari kontributor dashboard.')
+        st.info('**PDRB**: Berisi tabel dan visualisasi interaktif dari kontribusi ekonomi masing-masing dari 34 provinsi di Indonesia berdasarkan nilai PDRB tahun 2016 dari berbagai sektor/industri berdasarkan tabel IRIO BPS tahun 2016.')
+        st.info('**Ekspor-Impor**: Berisi tabel dan visualisasi interaktif dari kontribusi ekonomi masing-masing dari 34 provinsi di Indonesia berdasarkan transaksi ekspor dan impor antar provinsi tahun 2016 dari berbagai sekto/industri berdasarkan tabel IRIO BPS tahun 2016.')
+        st.info('**Forward-Backward Linkage**: Berisi tabel dan visualisasi interaktif dari sektor unggulan masing-masing dari 34 provinsi di Indonesia tahun 2016 dari berbagai sektor berdasarkan tabel IRIO BPS tahun 2016.')
+        st.info('**Simulasi Pengganda**: Berisi tabel interaktif simulasi sederhana untuk memperoleh total nilai PDRB dari 34 provinsi di Indonesia berdasarkan nilai masukan yang ditentukan pengguna berdasarkan tabel IRIO BPS tahun 2016.')
+        st.info('**Model Klasterisasi**: Berisi tabel dan visualisasi interaktif dari klasterisasi 34 provinsi di Indonesia berdasarkan berbagai sektor menggunakan model ML (machine learning).')
+        st.info('**Chatbot**: Berisi fitur chatbot untuk memudahkan pengambilan informasi dan interpretasi dari statistik ekonomi dari tabel IO 34 provinsi di Indonesia atau informasi lainnya yang relevan.')
 
 ## ------------------------------ TAB ABOUT ------------------------------
 if page == 'about':
