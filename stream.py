@@ -88,10 +88,78 @@ if page == 'about':
             """<div style="text-align: center"><a href="https://www.linkedin.com/in/teguhprasetyo08/">Teguh Prasetyo</a></div>""", unsafe_allow_html=True,
         )
     
-
 ## ------------------------------ TAB PDRB ------------------------------
 if page == 'pdrb':
     st.header('Produk Domestik Regional Bruto (PDRB) 34 Provinsi')
+    opt_skala = st.toggle("Skala Provinsi")
+    if opt_skala:
+        pd_col1a, pd_col1b = st.columns([3,7])
+        with pd_col1a:
+            with st.container(border=True):
+                jenis_pdrb = st.radio(label='**Pilih jenis PDRB :**', 
+                                    options=['PRODUKSI', 'PENDAPATAN', 'PENGELUARAN'])
+            with st.container(border=True):
+                if jenis_pdrb == 'PRODUKSI':
+                    opt_sektor = opt_sektor_prod
+                elif jenis_pdrb == 'PENDAPATAN':
+                    opt_sektor = opt_sektor_pend
+                else:
+                    opt_sektor = opt_sektor_peng
+                if st.checkbox('Semua Sektor'):
+                    sektor = st.multiselect('**Pilih Sektor**',
+                                                                opt_sektor,
+                                                                disabled=True)
+                    sektor =  opt_sektor.tolist()
+                else:
+                    sektor =  st.multiselect('**Pilih Sektor**',
+                                                                opt_sektor)
+            with st.container(border=True):
+                if st.checkbox('Semua Provinsi'):
+                    provinsi = st.multiselect('**Pilih Provinsi**',
+                                                                opt_provinsi,
+                                                                disabled=True)
+                    provinsi =  opt_provinsi.tolist()
+                else:
+                    provinsi =  st.multiselect('**Pilih Provinsi**',
+                                                                opt_provinsi)
+        with pd_col1b:   
+            dat1, fig1 = plotBerdasarkanJenisPDRB(jenis_pdrb, provinsi, sektor)
+            st.dataframe(dat1[['nama_prov', 'jenis_pdrb', 'nama_komp', 'nilai_jt']], use_container_width=True)
+        st.plotly_chart(fig1, use_container_width=True)
+        
+    else:
+        pd_col3a, pd_col3b = st.columns([3,7])
+        with pd_col3a:
+            with st.container(border=True):
+                jenis_pdrb = st.radio(label='**Pilih jenis PDRB :**', 
+                                    options=['PRODUKSI', 'PENDAPATAN', 'PENGELUARAN'])
+            with st.container(border=True):
+                if jenis_pdrb == 'PRODUKSI':
+                    opt_sektor = opt_sektor_prod
+                elif jenis_pdrb == 'PENDAPATAN':
+                    opt_sektor = opt_sektor_pend
+                else:
+                    opt_sektor = opt_sektor_peng
+                if st.checkbox('Semua Sektor'):
+                    sektor = st.multiselect('**Pilih Sektor**',
+                                                                opt_sektor,
+                                                                disabled=True)
+                    sektor =  opt_sektor.tolist()
+                else:
+                    sektor =  st.multiselect('**Pilih Sektor**',
+                                                                opt_sektor)
+                max_slider = len(df_pdrb_nasional[df_pdrb_nasional['jenis_pdrb'] == jenis_pdrb])
+                n_sektor = st.slider("**Tentukan banyak sektor:**",
+                                        min_value=1, max_value=max_slider)     
+        with pd_col3b:   
+            dat2, fig2 = plotNasionalBerdasarkanJenisPDRB(jenis_pdrb, sektor, n_sektor)
+            st.dataframe(dat2[['nama_komp', 'nilai_jt']].sort_values(['nilai_jt'], ascending=False), use_container_width=True)
+        pd_col4a, pd_col4b = st.columns([3,7])
+        with pd_col4a:
+            sum_pdrb = dat2['nilai_jt'].head(n_sektor).sum()
+            st.metric("**Total PDRB:**", value = 'Rp ' + str((sum_pdrb/1000000).round(3)) + ' T')
+        with pd_col4b:
+            st.plotly_chart(fig2, use_container_width=True)
 
 ## ------------------------------ TAB EKSIM ------------------------------
 if page == 'eksim':
