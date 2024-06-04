@@ -1,0 +1,13 @@
+plotly
+pandas
+data
+requests
+hydralit_components
+numpy
+pyreadr
+scikit-learn
+src
+yellowbrick
+llama_index
+st_aggrid
+os
