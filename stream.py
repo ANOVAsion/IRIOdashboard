@@ -218,10 +218,85 @@ if page == 'eksim':
 ## ------------------------------ TAB FLBL ------------------------------
 if page == 'flbl':
     st.header('Sektor Unggulan 34 Provinsi berdasarkan Forward & Backward Linkage')
+    
+    lin_col1a, lin_col1b = st.columns([2,5])
+    with lin_col1a:
+        lin_prov = st.selectbox('**Pilih Provinsi:**', opt_provinsi)
+        st.write('**Industri Unggulan Provinsi {} Berdasarkan Forward-Backward Linkage**'.format(lin_prov))
+        lin_df, lin_fig1 = makeScatterPlotFLBL(df_flbl, lin_prov)
+        unggulan_f_id = lin_df['nama_ind'][lin_df['n_forward'].idxmax()]
+        unggulan_b_id = lin_df['nama_ind'][lin_df['n_backward'].idxmax()]
+        st.metric('Forward Linkage', value=unggulan_f_id)
+        st.metric('Backward Linkage', value=unggulan_b_id)
+        
+    with lin_col1b:
+        st.plotly_chart(lin_fig1, use_container_width=True)
+
+    lin_col2a, lin_col2b, lin_col2c = st.columns([1,1,1])
+    with lin_col2b : 
+        lin_slid1 = st.slider('**Masukkan Banyak Industri yang Ingin Ditampilkan:**', 1, len(lin_df))
+
+    lin_col3a, lin_col3b = st.columns([1,1])
+    with lin_col3a:
+        lin_fig2a = makeBarChart(lin_df.sort_values('n_forward', ascending=False).head(lin_slid1), colx='nama_ind', coly='n_forward')
+        st.plotly_chart(lin_fig2a)
+    with lin_col3b:
+        lin_fig2b = makeBarChart(lin_df.sort_values('n_backward', ascending=False).head(lin_slid1), colx='nama_ind', coly='n_backward')
+        st.plotly_chart(lin_fig2b)
 
 ## ------------------------------ TAB SIMULATION ------------------------------
 if page == 'simul':
     st.header('Simulasi Perhitungan PDRB berdasarkan Provinsi dan Industri')
+    
+    sim_col1a, sim_col1b, sim_col1c = st.columns([1,1,1])
+    with sim_col1a:
+        '**Cari Berdasarkan:**'
+        sim_opt1 = st.checkbox('Provinsi')
+        sim_opt2 = st.checkbox('Industri')
+    with sim_col1b:         
+        if sim_opt1:
+            sim_prov = st.selectbox('**Pilih Provinsi:**', opt_provinsi)
+            sim_prov = [sim_prov]
+        else:
+            sim_prov = opt_provinsi 
+        if sim_opt2:
+            sim_ind = st.selectbox('**Pilih Industri:**', opt_ind)
+            sim_ind = [sim_ind]
+        else: 
+            sim_ind = opt_ind
+    df_sim = base_irio[base_irio['nama_prov'].isin(sim_prov)][base_irio['nama_ind'].isin(sim_ind)]   
+    row_number = st.number_input('Number of rows', min_value=0, value=len(df_sim)) 
+    
+    defaultColDef = {
+        "filter": True,
+        "resizable": True,
+        "sortable": True,
+    }
+    
+    options = {
+        "rowSelection": "multiple",
+        "rowMultiSelectWithClick": True,
+        "enableRangeSelection": True,
+    }
+    options_builder = GridOptionsBuilder.from_dataframe(df_sim)
+    options_builder.configure_default_column(**defaultColDef)
+    options_builder.configure_grid_options(**options)
+    options_builder.configure_column('target', editable=True)
+    grid_options = options_builder.build()
+    df_eksim2 = AgGrid(df_sim, gridOptions=grid_options,
+                       height=600,
+                       fit_columns_on_grid_load=True,
+                       header_checkbox_selection_filtered_only=True,
+                       allow_unsafe_jscode=True)
+    data = df_eksim2['data']
+
+    sim_base, sim_sim = simulationIRIO(data)
+    with sim_col1c:
+        sim_col1c_1, sim_col1c_2 = st.columns([1,1])
+        with sim_col1c_1:
+            st.metric('**Nilai PDRB Awal:**', 'Rp ' + str((sim_base).round(3)) + ' T')
+        with sim_col1c_2:
+            st.metric('**Nilai PDRB Akhir:**',  'Rp ' + str((sim_sim).round(3)) + ' T')
 
 ## ------------------------------ TAB CLUSTERING ------------------------------
 if page == 'clust':
