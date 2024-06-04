@@ -37,18 +37,18 @@ page = hc.nav_bar(
 if page == 'home':
     st.header('Introduction to The Project')
     
-    home_col1a, home_col1b, home_col1c = st.columns([5,1,10])
+    home_col1a, home_col1b, home_col1c = st.columns([8,1,18])
     with home_col1a:
-        'Selamat datang di **Dashboard Tabel IO 2016** oleh **ANOVAsion Team**!'
-        '''Tabel IO merupakan tools yang menjelaskan aliran transaksi barang dan jasa antar wilayah provinsi dan sektor ekonomi, di mana selain bermanfaat untuk mengetahui karakteristik ekonomi juga berfungsi untuk menentukan kebijakan ekonomi. Tabel IO dapat digunakan untuk melihat wilayah dan sektor ekonomi mana yang harus diatensi, serta wilayah dan sektor ekonomi mana yang menjadi unggulan di suatu negara.'''
-        ' '
-        'Beberapa analisis pada dashboard ini antara lain'
-        '- Analisis deskriptif visualisasi tabel IO, meliputi: analisis PDRB menurut sektor, analisis supply dan demand, analisis struktur output, dll;'
-        '- Analisis keterkaitan, meliputi: keterkaitan antar sektor dalam perekonomian, backward linkage, forward linkage, dan sektor unggulan;'
-        '- Analisis Multiplier Effect, meliputi: analisis pengganda output pendapatan, dan tenaga kerja;'
-        '- Analisis Machine Learning untuk aglomerasi dan klustering sektor usaha dari wilayah provinsi di Indonesia; serta'
-        '- Fitur chatbot yang memudahkan Bank Indonesia dalam menentukan kebijakan moneter terkait pengembangan ekonomi digital dan keuangan berbasis indikator ekonomi makro sektoral tersebut.'
-        
+        st.markdown('<div style="text-align: justify">Selamat datang di <b>Dashboard Tabel IO 2016</b> oleh <b>ANOVAsion Team</b>!</div>', unsafe_allow_html=True)
+        st.markdown('<div style="text-align: justify">Tabel IO merupakan tools yang menjelaskan aliran transaksi barang dan jasa antar wilayah provinsi dan sektor ekonomi, di mana selain bermanfaat untuk mengetahui karakteristik ekonomi juga berfungsi untuk menentukan kebijakan ekonomi. Tabel IO dapat digunakan untuk melihat wilayah dan sektor ekonomi mana yang harus diatensi, serta wilayah dan sektor ekonomi mana yang menjadi unggulan di suatu negara.</div>', unsafe_allow_html=True)
+        st.markdown('<div style="text-align: justify">Beberapa analisis pada dashboard ini antara lain:</div>', unsafe_allow_html=True)
+        st.markdown('<div style="text-align: justify"><li> Analisis deskriptif visualisasi tabel IO, meliputi: analisis PDRB menurut sektor, analisis supply dan demand, analisis struktur output, dll;</li></div>', unsafe_allow_html=True)
+        st.markdown('<div style="text-align: justify"><li> Analisis keterkaitan, meliputi: keterkaitan antar sektor dalam perekonomian, backward linkage, forward linkage, dan sektor unggulan; </li></div>', unsafe_allow_html=True)
+        st.markdown('<div style="text-align: justify"><li> Analisis Multiplier Effect, meliputi: analisis pengganda output pendapatan, dan tenaga kerja; </li></div>', unsafe_allow_html=True)
+        st.markdown('<div style="text-align: justify"><li> Analisis Machine Learning untuk aglomerasi dan klustering sektor usaha dari wilayah provinsi di Indonesia; serta </li></div>', unsafe_allow_html=True)
+        st.markdown('<div style="text-align: justify"><li> Fitur chatbot yang memudahkan Bank Indonesia dalam menentukan kebijakan moneter terkait pengembangan ekonomi digital dan keuangan berbasis indikator ekonomi makro sektoral tersebut. </li></div>', unsafe_allow_html=True)
+        st.markdown('<div style="text-align: justify"></div>', unsafe_allow_html=True)
+
     with home_col1c:
         'Detail informasi dari masing-masing tab pada Dashboard Tabel IO ini aadalah sebagai berikut:'
         st.info('**Home**: Berisi informasi umum dari fitur-fitur yang tersedia dalam dashboard.')
@@ -62,7 +62,32 @@ if page == 'home':
 
 ## ------------------------------ TAB ABOUT ------------------------------
 if page == 'about':
-    st.header('Introduction to The Team')
+    st.header('Meet The Team')
+    
+    p1, p2, p3, p4, p5, p6, p7, p8, p9 = st.columns([2,1,1,1,1,1,1,1,2])
+    with p1, p3, p5, p7, p9:
+        st.write("")
+    with p8:
+        st.image("properties/PHOTO-2024-06-04-22-20-18.jpg")
+        st.markdown(
+            """<div style="text-align: center"> <a href="https://www.linkedin.com/in/dhea-dewanti?originalSubdomain=id/">Dhea Dewanti</a></div>""", unsafe_allow_html=True,
+        )
+    with p6:
+        st.image("properties/PHOTO-2024-06-04-22-20-19.jpg")
+        st.markdown(
+            """<div style="text-align: center"><a href="https://linkedin/com/in/nurkhamidah">Nur Khamidah</a></div>""", unsafe_allow_html=True,
+        )
+    with p2:
+        st.image("properties/PHOTO-2024-06-04-22-20-17.jpg")
+        st.markdown(
+            """<div style="text-align: center"> <a href="https://www.linkedin.com/in/alfanugraha/">Alfa Nugraha P</a></div>""", unsafe_allow_html=True,
+        )
+    with p4:
+        st.image("properties/PHOTO-2024-06-04-22-20-18 2.jpg")
+        st.markdown(
+            """<div style="text-align: center"><a href="https://www.linkedin.com/in/teguhprasetyo08/">Teguh Prasetyo</a></div>""", unsafe_allow_html=True,
+        )
+    
 
 ## ------------------------------ TAB PDRB ------------------------------
 if page == 'pdrb':
