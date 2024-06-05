@@ -316,7 +316,7 @@ if page == 'simul':
             st.metric('**Nilai PDRB Akhir:**',  'Rp ' + str((sim_sim).round(3)) + ' T')
 
 ## ------------------------------ TAB CLUSTERING ------------------------------
-if page == 'clust':
+if page == 'clust2': ##jgn didelete
     st.header('Analisis Klaster 34 Provinsi di Indonesia dari Berbagai Sektor')
     
     seg_opt = st.multiselect('**Tentukan Kelompok Indikator Klasterisasi:**',
@@ -355,7 +355,62 @@ if page == 'clust':
                 segs = ", ".join(seg_opt[:-1]) + ', dan ' + seg_opt[-1]
             st.markdown('<div style="text-align:center"><b>Hasil Klasterisasi Provinsi berdasarkan {} </b></div>'.format(segs), unsafe_allow_html=True)
             st.plotly_chart(fig5, use_container_width=True)
-
+            
+if page == 'clust':
+    st.header('Analisis Klaster 34 Provinsi di Indonesia dari Berbagai Sektor')
+    seg_opt = st.selectbox('**Tentukan Kelompok Indikator Klasterisasi:**',
+                        ['Ekspor', 'Impor', 'Forward Linkage', 'Backward Linkage',
+                        'PDRB Produksi', 'PDRB Pendapatan', 'PDRB Pengeluaran', 'Final Demand'])
+    df_clus = X_E12['provinsi']
+    dict_dfs = {'Ekspor':X_E12,
+                'Impor':X_E22,
+                'Forward Linkage':X_F2,
+                'Backward Linkage':X_B2,
+                'PDRB Produksi':X_P12,
+                'PDRB Pendapatan':X_P32,
+                'PDRB Pengeluaran':X_P22,
+                'Final Demand':X_FD2}
+    
+    ind_opt = st.selectbox('**Tentukan Variabel Klasterisasi:**', dict_dfs[seg_opt].columns[1:])
+    btn = st.button("Add Column")
+    pop = st.popover('Delete Column')
+    btn2 = st.button('Reset Data')
+    df_add = pd.DataFrame({str(seg_opt) + '_' + str(ind_opt):dict_dfs[seg_opt][ind_opt]})
+    if btn:
+        if 'x' in st.session_state.keys():
+            st.session_state['x'] = pd.concat([st.session_state['x'], df_add], axis=1)
+        else:
+            st.session_state['x'] = df_add
+        
+    if 'x' in st.session_state.keys():
+        col1, col2 = pop.columns([1,1])
+        with col1:
+            pop_opt = pop.selectbox('**Pilih Kolom:**', st.session_state['x'].columns)
+        with col2:
+            pop_del = pop.button('Delete') 
+            if pop_del:
+                st.session_state['x'] = st.session_state['x'].drop(pop_opt, axis=1)
+        if btn2:
+            del st.session_state['x']
+            
+        df_clus = pd.concat([X_B2['provinsi'], st.session_state['x']], axis=1)
+        st.dataframe(df_clus, use_container_width=True)
+    
+        seg_col1, seg_col2 = st.columns([2,7])
+        dfd = clusterProvince(df_clus)
+        fig5 = plotSpatial2(dfd)
+        with seg_col1:
+            dfd.columns = ['Provinsi', 'Cluster']
+            st.dataframe(dfd, use_container_width=True)
+        with seg_col2:
+            segs = df_clus.columns
+            if len(segs) == 1:
+                segs2 = str(segs[0])
+            else:
+                segs2 = ", ".join(segs[:-1]) + ' dan ' + segs[-1]
+            st.markdown('<div style="text-align:center"><b>Hasil Klasterisasi Provinsi berdasarkan {} </b></div>'.format(segs2), unsafe_allow_html=True)
+            st.plotly_chart(fig5, use_container_width=True)
+    
 ## ------------------------------ TAB CHATBOT ------------------------------
 if page == 'chat':
     st.header('Chatbot IRIO Indonesia')

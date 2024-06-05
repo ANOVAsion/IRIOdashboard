@@ -29,6 +29,15 @@ X_P3 = pd.read_csv('data/csv/X_P3.csv', sep=';')
 X_E1 = pd.read_csv('data/csv/X_E1.csv', sep=';')
 X_E2 = pd.read_csv('data/csv/X_E2.csv', sep=';')
 
+X_FD2 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_FD.csv', sep=';')
+X_F2 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_F.csv', sep=';')
+X_B2 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_B.csv', sep=';')
+X_P12 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_P1.csv', sep=';')
+X_P22 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_P2.csv', sep=';')
+X_P32 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_P3.csv', sep=';')
+X_E12 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_E1.csv', sep=';')
+X_E22 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_E2.csv', sep=';')
+
 ## TAB PDRB
 df_pdrb_nasional = df_pdrb.groupby(['jenis_pdrb', 'nama_komp']).agg({"nilai_jt": "sum"}).reset_index()
 opt_provinsi = df_pdrb['nama_prov'].unique()
