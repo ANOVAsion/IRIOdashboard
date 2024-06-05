@@ -231,6 +231,7 @@ if page == 'eksim':
     with eks_col4b:
         st.plotly_chart(plotSunburst(df_eksim, eks_fil1, eks_fil2), use_container_width=True)
     st.plotly_chart(plotTreeMap(data_eks, eks_fil1), use_container_width=True)
+    
 ## ------------------------------ TAB FLBL ------------------------------
 if page == 'flbl':
     st.header('Sektor Unggulan 34 Provinsi berdasarkan Forward & Backward Linkage')

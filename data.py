@@ -252,7 +252,8 @@ def plotTreeMap(df, crit):
         inp2 = 'nama_prov_eks'
     fig = px.treemap(df,
         path=[inp1, inp2],
-        values='nilai_mil'
+        values='nilai_mil',
+        title="Tree Map Diagram dari Alur Ekspor-Impor berdasarkan {} (Miliar Rupiah)".format(crit)
     )
     fig.update_traces(root_color="lightgrey")
     fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
