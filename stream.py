@@ -5,14 +5,14 @@ import openai
 import hydralit_components as hc
 
 st.set_page_config(
-    page_title="ANOVAtion Prototype",
+    page_title="ANOVAsion - IRIO",
     page_icon="💸",
     layout='wide',
 )
 
 ## ------------------------------ NAVBAR ------------------------------
 
-st.markdown('<h1 style="text-align:center"><b>TABLE IRIO BPS 2016 - ANOVAtion PROTOTYPE</b></h1>', unsafe_allow_html=True)
+st.markdown('<h1 style="text-align:center"><b>ANOVAsion - IRIO</b></h1>', unsafe_allow_html=True)
 
 menu_data = [
     {'id': 'home', 'label':'Home'},
@@ -64,28 +64,28 @@ if page == 'home':
 
 ## ------------------------------ TAB ABOUT ------------------------------
 if page == 'about':
-    st.header('Meet The Team')
+    st.header('ANOVAsion Team')
     
     p1, p2, p3, p4, p5, p6, p7, p8, p9 = st.columns([2,1,1,1,1,1,1,1,2])
     with p1, p3, p5, p7, p9:
         st.write("")
     with p8:
-        st.image("properties/PHOTO-2024-06-04-22-20-18.jpg")
+        st.image("img/team/dev-dhea.jpg")
         st.markdown(
             """<div style="text-align: center"> <a href="https://www.linkedin.com/in/dhea-dewanti?originalSubdomain=id/">Dhea Dewanti</a></div>""", unsafe_allow_html=True,
         )
     with p6:
-        st.image("properties/PHOTO-2024-06-04-22-20-19.jpg")
+        st.image("img/team/dev-mida.jpg")
         st.markdown(
             """<div style="text-align: center"><a href="https://linkedin/com/in/nurkhamidah">Nur Khamidah</a></div>""", unsafe_allow_html=True,
         )
     with p2:
-        st.image("properties/PHOTO-2024-06-04-22-20-17.jpg")
+        st.image("img/team/dev-alfa.jpg")
         st.markdown(
             """<div style="text-align: center"> <a href="https://www.linkedin.com/in/alfanugraha/">Alfa Nugraha P</a></div>""", unsafe_allow_html=True,
         )
     with p4:
-        st.image("properties/PHOTO-2024-06-04-22-20-18 2.jpg")
+        st.image("img/team/dev-teguh.jpg")
         st.markdown(
             """<div style="text-align: center"><a href="https://www.linkedin.com/in/teguhprasetyo08/">Teguh Prasetyo</a></div>""", unsafe_allow_html=True,
         )
@@ -348,8 +348,8 @@ if page == 'chat':
     api_key = OpenAI(api_key = st.secrets["OPENAI_API_KEY"])
     @st.cache_resource(show_spinner=False)
     def load_data():
-        with st.spinner(text="Loading and indexing the Streamlit docs – hang tight! This should take 1-2 minutes."):
-            reader = SimpleDirectoryReader(input_dir="./corpus", recursive=True)
+        with st.spinner(text="Memuat dan mengindeks korpus – Harap menunggu 1-2 menit."):
+            reader = SimpleDirectoryReader(input_dir="./data/corpus", recursive=True)
             docs = reader.load_data()
             service_context = ServiceContext.from_defaults(llm=OpenAI(model="gpt-3.5-turbo", temperature=0.5, system_prompt="You are an expert on the Streamlit Python library and your job is to answer technical questions. Assume that all questions are related to the Streamlit Python library. Keep your answers technical and based on facts – do not hallucinate features."))
             index = VectorStoreIndex.from_documents(docs, service_context=service_context)
@@ -367,13 +367,13 @@ if page == 'chat':
         with st.chat_message(message["role"]):
             st.write(message["content"])
 
-    if prompt := st.chat_input("Silakan input keyword tentang hasil analisis table IRIO..."):
+    if prompt := st.chat_input("Masukan keyword yang dapat membantu Anda terhadap hasil analisis tabel IRIO.."):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
                 st.markdown(prompt)
             
         with st.chat_message("assistant"):
-            with st.spinner("Thinking..."):
+            with st.spinner("Sedang berpikir..."):
                 response = chat_engine.chat(prompt)
                 st.write(response.response)
                 message = {"role": "assistant", "content": response.response}

@@ -15,21 +15,21 @@ from llama_index.llms.openai import OpenAI
 import os
 
 ## LOAD DATA
-df_pdrb = pr.read_r("data/data_pdrb.rds")[None]
-df_eksim = pr.read_r('data/data_eksim_ap.rds')[None]
-df_flbl = pr.read_r('data/flbl_detail.rds')[None]
-leontif = pr.read_r("data/leontif.rds")[None]
-base_irio = pr.read_r("data/sim_irio.rds")[None]
-out_irio = pr.read_r("data/out_irio.rds")[None]
+df_pdrb = pr.read_r("data/rds/data_pdrb.rds")[None]
+df_eksim = pr.read_r('data/rds/data_eksim_ap.rds')[None]
+df_flbl = pr.read_r('data/rds/flbl_detail.rds')[None]
+leontif = pr.read_r("data/rds/leontif.rds")[None]
+base_irio = pr.read_r("data/rds/sim_irio.rds")[None]
+out_irio = pr.read_r("data/rds/out_irio.rds")[None]
 
-X_FD = pd.read_csv('data/X_FD.csv', sep=';')
-X_F = pd.read_csv('data/X_F.csv', sep=';')
-X_B = pd.read_csv('data/X_B.csv', sep=';')
-X_P1 = pd.read_csv('data/X_P1.csv', sep=';')
-X_P2 = pd.read_csv('data/X_P2.csv', sep=';')
-X_P3 = pd.read_csv('data/X_P3.csv', sep=';')
-X_E1 = pd.read_csv('data/X_E1.csv', sep=';')
-X_E2 = pd.read_csv('data/X_E2.csv', sep=';')
+X_FD = pd.read_csv('data/csv/X_FD.csv', sep=';')
+X_F = pd.read_csv('data/csv/X_F.csv', sep=';')
+X_B = pd.read_csv('data/csv/X_B.csv', sep=';')
+X_P1 = pd.read_csv('data/csv/X_P1.csv', sep=';')
+X_P2 = pd.read_csv('data/csv/X_P2.csv', sep=';')
+X_P3 = pd.read_csv('data/csv/X_P3.csv', sep=';')
+X_E1 = pd.read_csv('data/csv/X_E1.csv', sep=';')
+X_E2 = pd.read_csv('data/csv/X_E2.csv', sep=';')
 
 ## TAB PDRB
 df_pdrb_nasional = df_pdrb.groupby(['jenis_pdrb', 'nama_komp']).agg({"nilai_jt": "sum"}).reset_index()
