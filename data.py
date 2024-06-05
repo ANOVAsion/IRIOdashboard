@@ -194,30 +194,35 @@ def makeBarChart(df, colx, coly):
 
 def plotSankey(df, crit1, crit2):
     if crit1 == 'Provinsi':
-        inp = 'input_prov'
-        out = 'output_prov'
+        inp = 'nama_prov_eks'
+        out = 'nama_prov_imp'
     else:
-        inp = 'input_komp'
-        out = 'output_komp'
-    temp = df[inp].unique()
+        inp = 'nama_ind_eks'
+        out = 'penggunaan'
+    
+    df['color'] = ''
+    temp = list(df[inp].unique()) + list(df[out].unique())    
     for i in range(len(temp)):
         for j in range(len(df)):
             if temp[i] == df.loc[j, inp]:
                 df.loc[j, inp] = i
+                df.loc[j, 'color'] = 'rgba({}, {}, 20, 0.7)'.format(j*10, i*30)
             if temp[i] == df.loc[j, out]:
                 df.loc[j, out] = i
+                
     fig = go.Figure(data=[go.Sankey(
             node = dict(
             pad = 15,
             thickness = 20,
             line = dict(color = "black", width = 0.5),
             label = temp,
-            color = "blue"
+            color = "black"
             ),
             link = dict(
-            source = df[df[inp] == list(temp).index(crit2)][inp], 
+            source = df[df[inp] == temp.index(crit2)][inp], 
             target = df[out],
-            value = df['total']
+            value = df['total'],
+            color = df['color']
     ))])
     
     fig.update_layout(title_text="Sankey Diagram dari Alur Ekspor-Impor dari {} {}".format(crit1, crit2), font_size=10, height = 1000)

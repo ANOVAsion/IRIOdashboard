@@ -178,10 +178,10 @@ if page == 'eksim':
     with eks_col1b :
         if eks_fil1 == 'Industri':
             eks_fil2 = st.selectbox('**Pilih Industri:**', opt_eksim_ind)
-            df_sankey = df_produksi.groupby(['input_komp','output_komp']).agg(total=('nilai_jt', 'sum')).reset_index()
+            df_sankey = df_eksim.groupby(['nama_ind_eks','penggunaan',]).agg(total=('nilai_mil', 'sum')).reset_index()
         else :
             eks_fil2 = st.selectbox('**Pilih Provinsi:**', opt_provinsi)
-            df_sankey = df_produksi.groupby(['input_prov','output_prov']).agg(total=('nilai_jt', 'sum')).reset_index()
+            df_sankey = df_eksim[df_eksim['nama_prov_eks'] == eks_fil2].groupby(['nama_prov_eks','nama_prov_imp']).agg(total=('nilai_mil', 'sum')).reset_index()
     with eks_col1c:
         eks_fil3 = st.radio('**Pilih Jenis Transaksi:**', ["Ekspor antar Provinsi", "Impor antar Provinsi", "Net Ekspor"])
     data_eks = filterTableEksim(crit=eks_fil1, crit2=eks_fil2, jenis=eks_fil3)
@@ -227,6 +227,7 @@ if page == 'eksim':
     
     eks_col4a, eks_col4b = st.columns([2,1])
     with eks_col4a:
+        st.dataframe(df_sankey)
         st.plotly_chart(plotSankey(df_sankey, eks_fil1, eks_fil2), use_container_width=True)
 
 ## ------------------------------ TAB FLBL ------------------------------
