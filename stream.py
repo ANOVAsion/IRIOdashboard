@@ -178,8 +178,10 @@ if page == 'eksim':
     with eks_col1b :
         if eks_fil1 == 'Industri':
             eks_fil2 = st.selectbox('**Pilih Industri:**', opt_eksim_ind)
+            df_sankey = df_produksi.groupby(['input_komp','output_komp']).agg(total=('nilai_jt', 'sum')).reset_index()
         else :
             eks_fil2 = st.selectbox('**Pilih Provinsi:**', opt_provinsi)
+            df_sankey = df_produksi.groupby(['input_prov','output_prov']).agg(total=('nilai_jt', 'sum')).reset_index()
     with eks_col1c:
         eks_fil3 = st.radio('**Pilih Jenis Transaksi:**', ["Ekspor antar Provinsi", "Impor antar Provinsi", "Net Ekspor"])
     data_eks = filterTableEksim(crit=eks_fil1, crit2=eks_fil2, jenis=eks_fil3)
@@ -222,6 +224,10 @@ if page == 'eksim':
         df_4b = makeTableEksImp(crit = eks_fil1, crit2 = eks_fil2, jenis=eks_fil3).sort_values(['nilai_mil'], ascending = True)
         fig4b = makeBarChart(df_4b.head(eks_slid), colx = 'kode_prov', coly = 'nilai_mil')
         st.plotly_chart(fig4b, use_container_width = True)
+    
+    eks_col4a, eks_col4b = st.columns([2,1])
+    with eks_col4a:
+        st.plotly_chart(plotSankey(df_sankey, eks_fil1, eks_fil2), use_container_width=True)
 
 ## ------------------------------ TAB FLBL ------------------------------
 if page == 'flbl':
