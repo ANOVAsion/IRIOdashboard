@@ -4,15 +4,12 @@ import plotly.express as px
 import plotly.graph_objects as go
 import pyreadr as pr
 import requests
+
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from yellowbrick.cluster import KElbowVisualizer
 from src.agstyler import *
-from st_aggrid import AgGrid
-from llama_index.core import VectorStoreIndex,SimpleDirectoryReader,ServiceContext
 
-from llama_index.llms.openai import OpenAI
-import os
 
 ## LOAD DATA
 df_pdrb = pr.read_r("data/rds/data_pdrb.rds")[None]

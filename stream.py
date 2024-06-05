@@ -1,8 +1,14 @@
 from data import *
 
 import streamlit as st
-import openai
 import hydralit_components as hc
+import os
+
+from st_aggrid import AgGrid
+from llama_index.embeddings.openai import OpenAIEmbedding
+from llama_index.core import Settings, VectorStoreIndex, SimpleDirectoryReader
+from llama_index.llms.openai import OpenAI
+
 
 st.set_page_config(
     page_title="ANOVAsion - IRIO",
@@ -351,8 +357,14 @@ if page == 'chat':
         with st.spinner(text="Memuat dan mengindeks korpus – Harap menunggu 1-2 menit."):
             reader = SimpleDirectoryReader(input_dir="./data/corpus", recursive=True)
             docs = reader.load_data()
-            service_context = ServiceContext.from_defaults(llm=OpenAI(model="gpt-3.5-turbo", temperature=0.5, system_prompt="You are an expert on the Streamlit Python library and your job is to answer technical questions. Assume that all questions are related to the Streamlit Python library. Keep your answers technical and based on facts – do not hallucinate features."))
-            index = VectorStoreIndex.from_documents(docs, service_context=service_context)
+
+            Settings.llm = OpenAI(model="gpt-3.5-turbo")
+            Settings.embed_model = OpenAIEmbedding(model="text-embedding-3-small")
+            Settings.temperature = 0.5
+            Settings.chunk_size = 512
+            Settings.chunk_overlap = 20
+            
+            index = VectorStoreIndex.from_documents(docs)
             return index
 
     index = load_data()
@@ -367,7 +379,7 @@ if page == 'chat':
         with st.chat_message(message["role"]):
             st.write(message["content"])
 
-    if prompt := st.chat_input("Masukan keyword yang dapat membantu Anda terhadap hasil analisis tabel IRIO.."):
+    if prompt := st.chat_input("Masukan keyword untuk mencari informasi hasil analisis tabel IRIO.."):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
                 st.markdown(prompt)
