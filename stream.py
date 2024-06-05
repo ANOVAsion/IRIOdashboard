@@ -225,11 +225,12 @@ if page == 'eksim':
         fig4b = makeBarChart(df_4b.head(eks_slid), colx = 'kode_prov', coly = 'nilai_mil')
         st.plotly_chart(fig4b, use_container_width = True)
     
-    eks_col4a, eks_col4b = st.columns([2,1])
+    eks_col4a, eks_col4b = st.columns([3,2])
     with eks_col4a:
-        st.dataframe(df_sankey)
         st.plotly_chart(plotSankey(df_sankey, eks_fil1, eks_fil2), use_container_width=True)
-
+    with eks_col4b:
+        st.plotly_chart(plotSunburst(df_eksim, eks_fil1, eks_fil2), use_container_width=True)
+        
 ## ------------------------------ TAB FLBL ------------------------------
 if page == 'flbl':
     st.header('Sektor Unggulan 34 Provinsi berdasarkan Forward & Backward Linkage')

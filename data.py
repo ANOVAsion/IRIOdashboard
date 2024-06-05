@@ -224,9 +224,23 @@ def plotSankey(df, crit1, crit2):
             value = df['total'],
             color = df['color']
     ))])
-    
-    fig.update_layout(title_text="Sankey Diagram dari Alur Ekspor-Impor dari {} {}".format(crit1, crit2), font_size=10, height = 1000)
-    
+    fig.update_layout(title_text="Sankey Diagram dari Alur Ekspor-Impor dari {} {} (Miliar Rupiah)".format(crit1, crit2), font_size=10, height = 750)
+    return(fig)
+
+def plotSunburst(df, crit1, crit2):
+    if crit1 == 'Provinsi':
+        df2 = df[df['nama_prov_eks'] == crit2]
+        p1, p2 = 'nama_prov_imp', 'nama_ind_eks'
+    else:
+        df2 = df[df['nama_ind_eks'] == crit2]
+        p1, p2 = 'nama_prov_eks', 'nama_prov_imp'
+    fig = px.sunburst(
+        df2,
+        path=[p1, p2],
+        values='nilai_mil',
+        title="Sunburst Diagram dari Alur Ekspor-Impor {} {} (Miliar Rupiah)".format(crit1, crit2))
+    fig.update_traces(textinfo="label+percent parent")
+    fig.update_layout(height = 700)
     return(fig)
 
 
