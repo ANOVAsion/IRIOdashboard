@@ -18,6 +18,7 @@ df_flbl = pr.read_r('data/rds/flbl_detail.rds')[None]
 leontif = pr.read_r("data/rds/leontif.rds")[None]
 base_irio = pr.read_r("data/rds/sim_irio.rds")[None]
 out_irio = pr.read_r("data/rds/out_irio.rds")[None]
+df_produksi = pd.read_csv('data/csv/mat_pdrb.csv', sep=",")
 
 X_FD = pd.read_csv('data/csv/X_FD.csv', sep=';')
 X_F = pd.read_csv('data/csv/X_F.csv', sep=';')
@@ -190,6 +191,39 @@ def get_total_eksim(crit, crit2, data_eksim):
 def makeBarChart(df, colx, coly):
     fig = px.bar(df, x=colx, y=coly, color=colx, height=400)
     return fig
+
+def plotSankey(df, crit1, crit2):
+    if crit1 == 'Provinsi':
+        inp = 'input_prov'
+        out = 'output_prov'
+    else:
+        inp = 'input_komp'
+        out = 'output_komp'
+    temp = df[inp].unique()
+    for i in range(len(temp)):
+        for j in range(len(df)):
+            if temp[i] == df.loc[j, inp]:
+                df.loc[j, inp] = i
+            if temp[i] == df.loc[j, out]:
+                df.loc[j, out] = i
+    fig = go.Figure(data=[go.Sankey(
+            node = dict(
+            pad = 15,
+            thickness = 20,
+            line = dict(color = "black", width = 0.5),
+            label = temp,
+            color = "blue"
+            ),
+            link = dict(
+            source = df[df[inp] == list(temp).index(crit2)][inp], 
+            target = df[out],
+            value = df['total']
+    ))])
+    
+    fig.update_layout(title_text="Sankey Diagram dari Alur Ekspor-Impor dari {} {}".format(crit1, crit2), font_size=10, height = 1000)
+    
+    return(fig)
+
 
 ## TAB FL-BL
 
