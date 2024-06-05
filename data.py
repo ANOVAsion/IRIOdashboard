@@ -243,6 +243,20 @@ def plotSunburst(df, crit1, crit2):
     fig.update_layout(height = 700)
     return(fig)
 
+def plotTreeMap(df, crit):
+    if crit == 'Provinsi':
+        inp1 = 'nama_prov_eks'
+        inp2 = 'nama_ind_eks'
+    else :
+        inp1 = 'penggunaan'
+        inp2 = 'nama_prov_eks'
+    fig = px.treemap(df,
+        path=[inp1, inp2],
+        values='nilai_mil'
+    )
+    fig.update_traces(root_color="lightgrey")
+    fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
+    return(fig)
 
 ## TAB FL-BL
 
