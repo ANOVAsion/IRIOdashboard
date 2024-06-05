@@ -1,4 +1,3 @@
 *.rds filter=lfs diff=lfs merge=lfs -text
 data/rds/*.rds filter=lfs diff=lfs merge=lfs -text
-data/csv/*.csv filter=lfs diff=lfs merge=lfs -text
 data/corpus/*.csv filter=lfs diff=lfs merge=lfs -text
