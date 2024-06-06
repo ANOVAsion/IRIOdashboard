@@ -43,22 +43,63 @@ page = hc.nav_bar(
 
 ## ------------------------------ TAB HOME ------------------------------
 if page == 'home':
-    st.header('Introduction to The Project')
+    left_co, cent_co,last_co = st.columns([1,6,1])
+    with cent_co:
+        st.image('https://raw.githubusercontent.com/ANOVAsion/IRIOdashboard/main/img/apps/landing.png')
+    
+
+## ------------------------------ TAB ABOUT ------------------------------
+if page == 'about':
+    # st.header('Introduction to The Project')
     
     home_col1a, home_col1b, home_col1c = st.columns([8,1,18])
     with home_col1a:
         st.markdown('<div style="text-align: justify">Selamat datang di <b>Dashboard Tabel IO 2016</b> oleh <b>ANOVAsion Team</b>!</div>', unsafe_allow_html=True)
         st.markdown('<div style="text-align: justify">Tabel IO merupakan tools yang menjelaskan aliran transaksi barang dan jasa antar wilayah provinsi dan sektor ekonomi, di mana selain bermanfaat untuk mengetahui karakteristik ekonomi juga berfungsi untuk menentukan kebijakan ekonomi. Tabel IO dapat digunakan untuk melihat wilayah dan sektor ekonomi mana yang harus diatensi, serta wilayah dan sektor ekonomi mana yang menjadi unggulan di suatu negara.</div>', unsafe_allow_html=True)
         st.markdown('<div style="text-align: justify">Beberapa analisis pada dashboard ini antara lain:</div>', unsafe_allow_html=True)
-        st.markdown('<div style="text-align: justify"><li> Analisis deskriptif visualisasi tabel IO, meliputi: analisis PDRB menurut sektor, analisis supply dan demand, analisis struktur output, dll;</li></div>', unsafe_allow_html=True)
-        st.markdown('<div style="text-align: justify"><li> Analisis keterkaitan, meliputi: keterkaitan antar sektor dalam perekonomian, backward linkage, forward linkage, dan sektor unggulan; </li></div>', unsafe_allow_html=True)
-        st.markdown('<div style="text-align: justify"><li> Analisis Multiplier Effect, meliputi: analisis pengganda output pendapatan, dan tenaga kerja; </li></div>', unsafe_allow_html=True)
-        st.markdown('<div style="text-align: justify"><li> Analisis Machine Learning untuk aglomerasi dan klustering sektor usaha dari wilayah provinsi di Indonesia; serta </li></div>', unsafe_allow_html=True)
-        st.markdown('<div style="text-align: justify"><li> Fitur chatbot yang memudahkan Bank Indonesia dalam menentukan kebijakan moneter terkait pengembangan ekonomi digital dan keuangan berbasis indikator ekonomi makro sektoral tersebut. </li></div>', unsafe_allow_html=True)
+        st.markdown('''<div style="text-align: justify"><ul><li> Visualisasi analisis deskriptif tabel IRIO, meliputi: analisis PDRB menurut sektor, analisis supply dan demand, analisis struktur output, dll;</li>
+                    <li> Analisis keterkaitan, meliputi: keterkaitan antar sektor dalam perekonomian, backward linkage, forward linkage, dan sektor unggulan; </li>
+                    <li> Analisis Multiplier Effect, meliputi: analisis pengganda output pendapatan, dan tenaga kerja; </li>
+                    <li> Analisis Machine Learning untuk aglomerasi dan klustering sektor usaha dari wilayah provinsi di Indonesia; serta </li>
+                    <li> Chatbot yang memudahkan pencarian informasi seputar ekonomi regional. </li></ul></div>''', unsafe_allow_html=True)
         st.markdown('<div style="text-align: justify"></div>', unsafe_allow_html=True)
 
+        st.markdown('''
+            <p style="display:inline-block;font-weight: 700"><strong>We are </strong><img src="https://raw.githubusercontent.com/ANOVAsion/IRIOdashboard/main/img/anovation-logo.png" style="max-height:100px; width:auto;"> <strong>Team</strong></p>
+            <table>
+                <tr>
+                    <td>
+                        <a target="_blank" href="https://www.linkedin.com/in/alfanugraha/">
+                            <img src="https://raw.githubusercontent.com/ANOVAsion/IRIOdashboard/main/img/team/dev-alfa.jpg" style="max-height:100px; width:auto; display:block;">
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank" href="https://www.linkedin.com/in/dhea-dewanti">
+                            <img src="https://raw.githubusercontent.com/ANOVAsion/IRIOdashboard/main/img/team/dev-dhea.jpg" style="max-height:100px; width:auto; display:block;">
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank" href="https://linkedin/com/in/nurkhamidah">
+                            <img src="https://raw.githubusercontent.com/ANOVAsion/IRIOdashboard/main/img/team/dev-mida.jpg" style="max-height:100px; width:auto; display:block;">
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank" href="https://www.linkedin.com/in/teguhprasetyo08">
+                            <img src="https://raw.githubusercontent.com/ANOVAsion/IRIOdashboard/main/img/team/dev-teguh.jpg" style="max-height:100px; width:auto; display:block;">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Alfa Nugraha P</td>
+                    <td>Dhea Dewanti</td>
+                    <td>Nur Khamidah</td>
+                    <td>Teguh Prasetyo</td>
+                </tr>
+            </table>
+        ''', unsafe_allow_html=True)
+
     with home_col1c:
-        'Detail informasi dari masing-masing tab pada Dashboard Tabel IO ini aadalah sebagai berikut:'
+        'Detail informasi dari masing-masing tab pada Dashboard Tabel IRIO ini aadalah sebagai berikut:'
         st.info('**Home**: Berisi informasi umum dari fitur-fitur yang tersedia dalam dashboard.')
         st.info('**About**: Berisi informasi umum dari kontributor dashboard.')
         st.info('**PDRB**: Berisi tabel dan visualisasi interaktif dari kontribusi ekonomi masing-masing dari 34 provinsi di Indonesia berdasarkan nilai PDRB tahun 2016 dari berbagai sektor/industri berdasarkan tabel IRIO BPS tahun 2016.')
@@ -67,34 +108,6 @@ if page == 'home':
         st.info('**Simulasi Pengganda**: Berisi tabel interaktif simulasi sederhana untuk memperoleh total nilai PDRB dari 34 provinsi di Indonesia berdasarkan nilai masukan yang ditentukan pengguna berdasarkan tabel IRIO BPS tahun 2016.')
         st.info('**Model Klasterisasi**: Berisi tabel dan visualisasi interaktif dari klasterisasi 34 provinsi di Indonesia berdasarkan berbagai sektor menggunakan model ML (machine learning).')
         st.info('**Chatbot**: Berisi fitur chatbot untuk memudahkan pengambilan informasi dan interpretasi dari statistik ekonomi dari tabel IO 34 provinsi di Indonesia atau informasi lainnya yang relevan.')
-
-## ------------------------------ TAB ABOUT ------------------------------
-if page == 'about':
-    st.header('ANOVAsion Team')
-    
-    p1, p2, p3, p4, p5, p6, p7, p8, p9 = st.columns([2,1,1,1,1,1,1,1,2])
-    with p1, p3, p5, p7, p9:
-        st.write("")
-    with p8:
-        st.image("img/team/dev-dhea.jpg")
-        st.markdown(
-            """<div style="text-align: center"> <a href="https://www.linkedin.com/in/dhea-dewanti?originalSubdomain=id/">Dhea Dewanti</a></div>""", unsafe_allow_html=True,
-        )
-    with p6:
-        st.image("img/team/dev-mida.jpg")
-        st.markdown(
-            """<div style="text-align: center"><a href="https://linkedin/com/in/nurkhamidah">Nur Khamidah</a></div>""", unsafe_allow_html=True,
-        )
-    with p2:
-        st.image("img/team/dev-alfa.jpg")
-        st.markdown(
-            """<div style="text-align: center"> <a href="https://www.linkedin.com/in/alfanugraha/">Alfa Nugraha P</a></div>""", unsafe_allow_html=True,
-        )
-    with p4:
-        st.image("img/team/dev-teguh.jpg")
-        st.markdown(
-            """<div style="text-align: center"><a href="https://www.linkedin.com/in/teguhprasetyo08/">Teguh Prasetyo</a></div>""", unsafe_allow_html=True,
-        )
     
 ## ------------------------------ TAB PDRB ------------------------------
 if page == 'pdrb':
@@ -225,12 +238,12 @@ if page == 'eksim':
         fig4b = makeBarChart(df_4b.head(eks_slid), colx = 'kode_prov', coly = 'nilai_mil')
         st.plotly_chart(fig4b, use_container_width = True)
     
-    eks_col4a, eks_col4b = st.columns([3,2])
-    with eks_col4a:
-        st.plotly_chart(plotSankey(df_sankey, eks_fil1, eks_fil2), use_container_width=True)
-    with eks_col4b:
-        st.plotly_chart(plotSunburst(df_eksim, eks_fil1, eks_fil2), use_container_width=True)
-    st.plotly_chart(plotTreeMap(data_eks, eks_fil1), use_container_width=True)
+    # eks_col4a, eks_col4b = st.columns([3,2])
+    # with eks_col4a:
+    #     st.plotly_chart(plotSankey(df_sankey, eks_fil1, eks_fil2), use_container_width=True)
+    # with eks_col4b:
+    #     st.plotly_chart(plotSunburst(df_eksim, eks_fil1, eks_fil2), use_container_width=True)
+    # st.plotly_chart(plotTreeMap(data_eks, eks_fil1), use_container_width=True)
     
 ## ------------------------------ TAB FLBL ------------------------------
 if page == 'flbl':
@@ -316,46 +329,67 @@ if page == 'simul':
             st.metric('**Nilai PDRB Akhir:**',  'Rp ' + str((sim_sim).round(3)) + ' T')
 
 ## ------------------------------ TAB CLUSTERING ------------------------------
+        
 if page == 'clust':
     st.header('Analisis Klaster 34 Provinsi di Indonesia dari Berbagai Sektor')
+    seg_opt = st.selectbox('**Tentukan Kelompok Indikator Klasterisasi:**',
+                        ['Ekspor', 'Impor', 'Forward Linkage', 'Backward Linkage',
+                        'PDRB Produksi', 'PDRB Pendapatan', 'PDRB Pengeluaran', 'Final Demand'])
+    df_clus = X_E12['provinsi']
+    dict_dfs = {'Ekspor':X_E12,
+                'Impor':X_E22,
+                'Forward Linkage':X_F2,
+                'Backward Linkage':X_B2,
+                'PDRB Produksi':X_P12,
+                'PDRB Pendapatan':X_P32,
+                'PDRB Pengeluaran':X_P22,
+                'Final Demand':X_FD2}
     
-    seg_opt = st.multiselect('**Tentukan Kelompok Indikator Klasterisasi:**',
-                         ['Ekspor', 'Impor', 'Forward Linkage', 'Backward Linkage',
-                          'PDRB Produksi', 'PDRB Pendapatan', 'PDRB Pengeluaran', 'Final Demand'])
-    dict_dfs = {'Ekspor':X_E1,
-                'Impor':X_E2,
-                'Forward Linkage':X_F,
-                'Backward Linkage':X_B,
-                'PDRB Produksi':X_P1,
-                'PDRB Pendapatan':X_P3,
-                'PDRB Pengeluaran':X_P2,
-                'Final Demand':X_FD}
-    dfs = []
-    for opt in seg_opt:
-        dfs.append(dict_dfs[opt])
-    try:
-        df_X = dfs[0]
-        if len(dfs) > 1:
-            for df in dfs[1:]:
-                df_X = pd.concat([df_X, df.iloc[:, 1:]], axis=1)
-    except IndexError:
-        st.write('Masukkan Tabel!')
-    else:
-        st.dataframe(df_X)
-        seg_col1, seg_col2 = st.columns([2,7])
-        dfd = clusterProvince(df_X)
-        fig5 = plotSpatial2(dfd)
-        with seg_col1:
-            dfd.columns = ['Provinsi', 'Cluster']
-            st.dataframe(dfd, use_container_width=True)
-        with seg_col2:
-            if len(seg_opt)==1:
-                segs = str(seg_opt[0])
-            else:
-                segs = ", ".join(seg_opt[:-1]) + ', dan ' + seg_opt[-1]
-            st.markdown('<div style="text-align:center"><b>Hasil Klasterisasi Provinsi berdasarkan {} </b></div>'.format(segs), unsafe_allow_html=True)
-            st.plotly_chart(fig5, use_container_width=True)
+    ind_opt = st.selectbox('**Tentukan Variabel Klasterisasi:**', dict_dfs[seg_opt].columns[1:])
+    btn = st.button("Add Column")
+    pop = st.popover('Delete Column')
+    btn2 = st.button('Reset Data')
+    df_add = pd.DataFrame({str(seg_opt) + '_' + str(ind_opt):dict_dfs[seg_opt][ind_opt]})
+    if btn:
+        if 'x' in st.session_state.keys():
+            st.session_state['x'] = pd.concat([st.session_state['x'], df_add], axis=1)
+        else:
+            st.session_state['x'] = df_add
+        
+    if 'x' in st.session_state.keys():
+        col1, col2 = pop.columns([1,1])
+        with col1:
+            pop_opt = pop.selectbox('**Pilih Kolom:**', st.session_state['x'].columns)
+        with col2:
+            pop_del = pop.button('Delete') 
+            if pop_del:
+                st.session_state['x'] = st.session_state['x'].drop(pop_opt, axis=1)
+        if btn2:
+            del st.session_state['x']
+        
+        try:    
+            df_clus = pd.concat([X_B2['provinsi'], st.session_state['x']], axis=1)
+            st.dataframe(df_clus, use_container_width=True)
+            
+            seg_col1, seg_col2 = st.columns([2,7])
+            dfd, dfd_sum, dfd_cent = clusterProvince(df_clus)
+            fig5 = plotSpatial2(dfd)
 
+            with seg_col1:
+                st.dataframe(dfd, use_container_width=True)
+            with seg_col2:
+                segs = df_clus.columns
+                if len(segs) == 1:
+                    segs2 = str(segs[0])
+                else:
+                    segs2 = ", ".join(segs[:-1]) + ' dan ' + segs[-1]
+                st.markdown('<div style="text-align:center"><b>Hasil Klasterisasi Provinsi berdasarkan {} </b></div>'.format(segs2), unsafe_allow_html=True)
+                st.plotly_chart(fig5, use_container_width=True)
+            st.markdown('<div style="text-align: center"><b>Tabel Hasil Klasterisasi</b></div>'.format(segs2), unsafe_allow_html=True)
+            st.table(dfd_sum)
+        except:
+            'Tabel Kosong.'
+    
 ## ------------------------------ TAB CHATBOT ------------------------------
 if page == 'chat':
     st.header('Chatbot IRIO Indonesia')

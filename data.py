@@ -18,16 +18,15 @@ df_flbl = pr.read_r('data/rds/flbl_detail.rds')[None]
 leontif = pr.read_r("data/rds/leontif.rds")[None]
 base_irio = pr.read_r("data/rds/sim_irio.rds")[None]
 out_irio = pr.read_r("data/rds/out_irio.rds")[None]
-df_produksi = pd.read_csv('data/csv/mat_pdrb.csv', sep=",")
 
-X_FD = pd.read_csv('data/csv/X_FD.csv', sep=';')
-X_F = pd.read_csv('data/csv/X_F.csv', sep=';')
-X_B = pd.read_csv('data/csv/X_B.csv', sep=';')
-X_P1 = pd.read_csv('data/csv/X_P1.csv', sep=';')
-X_P2 = pd.read_csv('data/csv/X_P2.csv', sep=';')
-X_P3 = pd.read_csv('data/csv/X_P3.csv', sep=';')
-X_E1 = pd.read_csv('data/csv/X_E1.csv', sep=';')
-X_E2 = pd.read_csv('data/csv/X_E2.csv', sep=';')
+X_FD2 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_FD.csv', sep=';')
+X_F2 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_F.csv', sep=';')
+X_B2 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_B.csv', sep=';')
+X_P12 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_P1.csv', sep=';')
+X_P22 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_P2.csv', sep=';')
+X_P32 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_P3.csv', sep=';')
+X_E12 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_E1.csv', sep=';')
+X_E22 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_E2.csv', sep=';')
 
 ## TAB PDRB
 df_pdrb_nasional = df_pdrb.groupby(['jenis_pdrb', 'nama_komp']).agg({"nilai_jt": "sum"}).reset_index()
@@ -287,8 +286,11 @@ def concatTables(*dfs):
     df = pd.concat(dfs, axis=1)
     return(df)
 
+def gabung_string(group):
+    return ', '.join(group)
+
 def clusterProvince(df):
-    hasil = X_FD['provinsi']
+    prov = X_FD2['provinsi']
     if 'provinsi' in df.columns:
         df.drop('provinsi', axis=1, inplace=True)
     ms = StandardScaler()
@@ -300,8 +302,16 @@ def clusterProvince(df):
     if k > 5: k=5
     kmeans = KMeans(n_clusters=k, random_state=5)
     kmeans.fit(X)
-    hasil = pd.concat([hasil, pd.DataFrame({'Segment':kmeans.labels_+1})], axis=1)
-    return(hasil)
+    df['Segment'] = kmeans.labels_ + 1
+    labels = kmeans.labels_
+    centroids = kmeans.cluster_centers_
+    df_segm_analysis = df.groupby(['Segment']).mean()
+    df_segm_analysis['N Obs'] = df.groupby(['Segment']).size()
+    df_segm_analysis['Prop Obs'] = df_segm_analysis['N Obs'] / df_segm_analysis['N Obs'].sum()
+    hasil2 = pd.concat([prov, pd.DataFrame({'Segment': labels + 1})], axis=1)
+    df_segm_analysis['Provinsi'] = hasil2.groupby('Segment')['provinsi'].apply(gabung_string)
+    centroid =  pd.DataFrame(centroids)
+    return(hasil2, df_segm_analysis, centroid)
 
 def plotSpatial2(dat):
     df2 = df.merge(dat, left_on='Column', right_on='provinsi')
