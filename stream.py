@@ -371,7 +371,7 @@ if page == 'clust':
             st.markdown('<div style="text-align:center"><b>Hasil Klasterisasi Provinsi berdasarkan {} </b></div>'.format(segs2), unsafe_allow_html=True)
             st.plotly_chart(fig5, use_container_width=True)
     clus_col1a, clus_col1b = st.columns([1,1])
-    st.markdown('<div style="text-align: center"><b>Tabel Hasil Klasterisasi</b></div>', unsafe_allow_html=True)
+    st.markdown('<div style="text-align: center"><b>Tabel Hasil Klasterisasi</b></div>'.format(segs2), unsafe_allow_html=True)
     st.table(dfd_sum)
     
 ## ------------------------------ TAB CHATBOT ------------------------------
