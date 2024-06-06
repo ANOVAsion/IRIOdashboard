@@ -291,7 +291,7 @@ def gabung_string(group):
     return ', '.join(group)
 
 def clusterProvince(df):
-    prov = X_FD['provinsi']
+    prov = X_FD2['provinsi']
     if 'provinsi' in df.columns:
         df.drop('provinsi', axis=1, inplace=True)
     ms = StandardScaler()
