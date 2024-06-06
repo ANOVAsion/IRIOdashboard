@@ -65,7 +65,7 @@ Berikut ini adalah dokumentasi singkat
     </td>
     <td>
       <a target="_blank" href="https://anovasion-irio.streamlit.app">
-        <img src="img/apps/klaster.png" style="max-height:150px; width:auto; display:block;">
+        <img src="img/apps/linkage.png" style="max-height:150px; width:auto; display:block;">
       </a>
     </td>
     <td>
@@ -80,12 +80,12 @@ Berikut ini adalah dokumentasi singkat
     </td>
   </tr>
   <tr>
-    <td>Input widgets</td>
-    <td>Dataframes</td>
-    <td>Charts</td>
-    <td>Layout</td>
-    <td>Multi-page apps</td>
-    <td>Fun</td>
+    <td>beranda</td>
+    <td>PDRB</td>
+    <td>ekspor-impor</td>
+    <td>linkage</td>
+    <td>klaster</td>
+    <td>chatbot</td>
   </tr>
 </table>
 
