@@ -316,46 +316,7 @@ if page == 'simul':
             st.metric('**Nilai PDRB Akhir:**',  'Rp ' + str((sim_sim).round(3)) + ' T')
 
 ## ------------------------------ TAB CLUSTERING ------------------------------
-if page == 'clust2': ##jgn didelete
-    st.header('Analisis Klaster 34 Provinsi di Indonesia dari Berbagai Sektor')
-    
-    seg_opt = st.multiselect('**Tentukan Kelompok Indikator Klasterisasi:**',
-                         ['Ekspor', 'Impor', 'Forward Linkage', 'Backward Linkage',
-                          'PDRB Produksi', 'PDRB Pendapatan', 'PDRB Pengeluaran', 'Final Demand'])
-    dict_dfs = {'Ekspor':X_E1,
-                'Impor':X_E2,
-                'Forward Linkage':X_F,
-                'Backward Linkage':X_B,
-                'PDRB Produksi':X_P1,
-                'PDRB Pendapatan':X_P3,
-                'PDRB Pengeluaran':X_P2,
-                'Final Demand':X_FD}
-    dfs = []
-    for opt in seg_opt:
-        dfs.append(dict_dfs[opt])
-    try:
-        df_X = dfs[0]
-        if len(dfs) > 1:
-            for df in dfs[1:]:
-                df_X = pd.concat([df_X, df.iloc[:, 1:]], axis=1)
-    except IndexError:
-        st.write('Masukkan Tabel!')
-    else:
-        st.dataframe(df_X)
-        seg_col1, seg_col2 = st.columns([2,7])
-        dfd = clusterProvince(df_X)
-        fig5 = plotSpatial2(dfd)
-        with seg_col1:
-            dfd.columns = ['Provinsi', 'Cluster']
-            st.dataframe(dfd, use_container_width=True)
-        with seg_col2:
-            if len(seg_opt)==1:
-                segs = str(seg_opt[0])
-            else:
-                segs = ", ".join(seg_opt[:-1]) + ', dan ' + seg_opt[-1]
-            st.markdown('<div style="text-align:center"><b>Hasil Klasterisasi Provinsi berdasarkan {} </b></div>'.format(segs), unsafe_allow_html=True)
-            st.plotly_chart(fig5, use_container_width=True)
-            
+        
 if page == 'clust':
     st.header('Analisis Klaster 34 Provinsi di Indonesia dari Berbagai Sektor')
     seg_opt = st.selectbox('**Tentukan Kelompok Indikator Klasterisasi:**',
