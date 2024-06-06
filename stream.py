@@ -353,26 +353,29 @@ if page == 'clust':
                 st.session_state['x'] = st.session_state['x'].drop(pop_opt, axis=1)
         if btn2:
             del st.session_state['x']
+        
+        try:    
+            df_clus = pd.concat([X_B2['provinsi'], st.session_state['x']], axis=1)
+            st.dataframe(df_clus, use_container_width=True)
             
-        df_clus = pd.concat([X_B2['provinsi'], st.session_state['x']], axis=1)
-        st.dataframe(df_clus, use_container_width=True)
-    
-        seg_col1, seg_col2 = st.columns([2,7])
-        dfd, dfd_sum, dfd_cent = clusterProvince(df_clus)
-        fig5 = plotSpatial2(dfd)
-        with seg_col1:
-            st.dataframe(dfd, use_container_width=True)
-        with seg_col2:
-            segs = df_clus.columns
-            if len(segs) == 1:
-                segs2 = str(segs[0])
-            else:
-                segs2 = ", ".join(segs[:-1]) + ' dan ' + segs[-1]
-            st.markdown('<div style="text-align:center"><b>Hasil Klasterisasi Provinsi berdasarkan {} </b></div>'.format(segs2), unsafe_allow_html=True)
-            st.plotly_chart(fig5, use_container_width=True)
-    clus_col1a, clus_col1b = st.columns([1,1])
-    st.markdown('<div style="text-align: center"><b>Tabel Hasil Klasterisasi</b></div>'.format(segs2), unsafe_allow_html=True)
-    st.table(dfd_sum)
+            seg_col1, seg_col2 = st.columns([2,7])
+            dfd, dfd_sum, dfd_cent = clusterProvince(df_clus)
+            fig5 = plotSpatial2(dfd)
+
+            with seg_col1:
+                st.dataframe(dfd, use_container_width=True)
+            with seg_col2:
+                segs = df_clus.columns
+                if len(segs) == 1:
+                    segs2 = str(segs[0])
+                else:
+                    segs2 = ", ".join(segs[:-1]) + ' dan ' + segs[-1]
+                st.markdown('<div style="text-align:center"><b>Hasil Klasterisasi Provinsi berdasarkan {} </b></div>'.format(segs2), unsafe_allow_html=True)
+                st.plotly_chart(fig5, use_container_width=True)
+            st.markdown('<div style="text-align: center"><b>Tabel Hasil Klasterisasi</b></div>'.format(segs2), unsafe_allow_html=True)
+            st.table(dfd_sum)
+        except:
+            'Tabel Kosong.'
     
 ## ------------------------------ TAB CHATBOT ------------------------------
 if page == 'chat':
