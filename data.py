@@ -19,6 +19,7 @@ leontif = pr.read_r("data/rds/leontif.rds")[None]
 base_irio = pr.read_r("data/rds/sim_irio.rds")[None]
 out_irio = pr.read_r("data/rds/out_irio.rds")[None]
 
+<<<<<<< HEAD
 X_FD2 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_FD.csv', sep=';')
 X_F2 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_F.csv', sep=';')
 X_B2 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_B.csv', sep=';')
@@ -27,6 +28,16 @@ X_P22 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data
 X_P32 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_P3.csv', sep=';')
 X_E12 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_E1.csv', sep=';')
 X_E22 = pd.read_csv('https://raw.githubusercontent.com/nurkhamidah/dat/main/Data_X_E2.csv', sep=';')
+=======
+X_FD2 = pd.read_csv('data/csv/X_FD.csv', sep=';')
+X_F2 = pd.read_csv('data/csv/X_F.csv', sep=';')
+X_B2 = pd.read_csv('data/csv/X_B.csv', sep=';')
+X_P12 = pd.read_csv('data/csv/X_P1.csv', sep=';')
+X_P22 = pd.read_csv('data/csv/X_P2.csv', sep=';')
+X_P32 = pd.read_csv('data/csv/X_P3.csv', sep=';')
+X_E12 = pd.read_csv('data/csv/X_E1.csv', sep=';')
+X_E22 = pd.read_csv('data/csv/X_E2.csv', sep=';')
+>>>>>>> 41e1bfd3329f7af20ae13fff5174ac7f9ade0aae
 
 ## TAB PDRB
 df_pdrb_nasional = df_pdrb.groupby(['jenis_pdrb', 'nama_komp']).agg({"nilai_jt": "sum"}).reset_index()
