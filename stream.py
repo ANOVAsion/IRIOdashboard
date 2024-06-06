@@ -397,10 +397,9 @@ if page == 'clust':
         st.dataframe(df_clus, use_container_width=True)
     
         seg_col1, seg_col2 = st.columns([2,7])
-        dfd = clusterProvince(df_clus)
+        dfd, dfd_sum, dfd_cent = clusterProvince(df_clus)
         fig5 = plotSpatial2(dfd)
         with seg_col1:
-            dfd.columns = ['Provinsi', 'Cluster']
             st.dataframe(dfd, use_container_width=True)
         with seg_col2:
             segs = df_clus.columns
@@ -410,6 +409,9 @@ if page == 'clust':
                 segs2 = ", ".join(segs[:-1]) + ' dan ' + segs[-1]
             st.markdown('<div style="text-align:center"><b>Hasil Klasterisasi Provinsi berdasarkan {} </b></div>'.format(segs2), unsafe_allow_html=True)
             st.plotly_chart(fig5, use_container_width=True)
+    clus_col1a, clus_col1b = st.columns([1,1])
+    st.markdown('<div style="text-align: center"><b>Tabel Hasil Klasterisasi Berdasarkan {}</b></div>'.format(segs2), unsafe_allow_html=True)
+    st.table(dfd_sum)
     
 ## ------------------------------ TAB CHATBOT ------------------------------
 if page == 'chat':

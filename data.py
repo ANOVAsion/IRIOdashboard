@@ -296,8 +296,11 @@ def concatTables(*dfs):
     df = pd.concat(dfs, axis=1)
     return(df)
 
+def gabung_string(group):
+    return ', '.join(group)
+
 def clusterProvince(df):
-    hasil = X_FD['provinsi']
+    prov = X_FD['provinsi']
     if 'provinsi' in df.columns:
         df.drop('provinsi', axis=1, inplace=True)
     ms = StandardScaler()
@@ -309,8 +312,16 @@ def clusterProvince(df):
     if k > 5: k=5
     kmeans = KMeans(n_clusters=k, random_state=5)
     kmeans.fit(X)
-    hasil = pd.concat([hasil, pd.DataFrame({'Segment':kmeans.labels_+1})], axis=1)
-    return(hasil)
+    df['Segment'] = kmeans.labels_ + 1
+    labels = kmeans.labels_
+    centroids = kmeans.cluster_centers_
+    df_segm_analysis = df.groupby(['Segment']).mean()
+    df_segm_analysis['N Obs'] = df.groupby(['Segment']).size()
+    df_segm_analysis['Prop Obs'] = df_segm_analysis['N Obs'] / df_segm_analysis['N Obs'].sum()
+    hasil2 = pd.concat([prov, pd.DataFrame({'Segment': labels + 1})], axis=1)
+    df_segm_analysis['Provinsi'] = hasil2.groupby('Segment')['provinsi'].apply(gabung_string)
+    centroid =  pd.DataFrame(centroids)
+    return(hasil2, df_segm_analysis, centroid)
 
 def plotSpatial2(dat):
     df2 = df.merge(dat, left_on='Column', right_on='provinsi')
