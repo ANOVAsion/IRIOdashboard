@@ -45,7 +45,7 @@ page = hc.nav_bar(
 if page == 'home':
     left_co, cent_co,last_co = st.columns([1,6,1])
     with cent_co:
-        st.image('img/apps/landing.png')
+        st.image('https://raw.githubusercontent.com/ANOVAsion/IRIOdashboard/main/img/apps/landing.png')
     
 
 ## ------------------------------ TAB ABOUT ------------------------------
