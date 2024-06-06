@@ -43,22 +43,63 @@ page = hc.nav_bar(
 
 ## ------------------------------ TAB HOME ------------------------------
 if page == 'home':
-    st.header('Introduction to The Project')
+    left_co, cent_co,last_co = st.columns([1,6,1])
+    with cent_co:
+        st.image('img/apps/landing.png')
+    
+
+## ------------------------------ TAB ABOUT ------------------------------
+if page == 'about':
+    # st.header('Introduction to The Project')
     
     home_col1a, home_col1b, home_col1c = st.columns([8,1,18])
     with home_col1a:
         st.markdown('<div style="text-align: justify">Selamat datang di <b>Dashboard Tabel IO 2016</b> oleh <b>ANOVAsion Team</b>!</div>', unsafe_allow_html=True)
         st.markdown('<div style="text-align: justify">Tabel IO merupakan tools yang menjelaskan aliran transaksi barang dan jasa antar wilayah provinsi dan sektor ekonomi, di mana selain bermanfaat untuk mengetahui karakteristik ekonomi juga berfungsi untuk menentukan kebijakan ekonomi. Tabel IO dapat digunakan untuk melihat wilayah dan sektor ekonomi mana yang harus diatensi, serta wilayah dan sektor ekonomi mana yang menjadi unggulan di suatu negara.</div>', unsafe_allow_html=True)
         st.markdown('<div style="text-align: justify">Beberapa analisis pada dashboard ini antara lain:</div>', unsafe_allow_html=True)
-        st.markdown('<div style="text-align: justify"><li> Analisis deskriptif visualisasi tabel IO, meliputi: analisis PDRB menurut sektor, analisis supply dan demand, analisis struktur output, dll;</li></div>', unsafe_allow_html=True)
-        st.markdown('<div style="text-align: justify"><li> Analisis keterkaitan, meliputi: keterkaitan antar sektor dalam perekonomian, backward linkage, forward linkage, dan sektor unggulan; </li></div>', unsafe_allow_html=True)
-        st.markdown('<div style="text-align: justify"><li> Analisis Multiplier Effect, meliputi: analisis pengganda output pendapatan, dan tenaga kerja; </li></div>', unsafe_allow_html=True)
-        st.markdown('<div style="text-align: justify"><li> Analisis Machine Learning untuk aglomerasi dan klustering sektor usaha dari wilayah provinsi di Indonesia; serta </li></div>', unsafe_allow_html=True)
-        st.markdown('<div style="text-align: justify"><li> Fitur chatbot yang memudahkan Bank Indonesia dalam menentukan kebijakan moneter terkait pengembangan ekonomi digital dan keuangan berbasis indikator ekonomi makro sektoral tersebut. </li></div>', unsafe_allow_html=True)
+        st.markdown('''<div style="text-align: justify"><ul><li> Visualisasi analisis deskriptif tabel IRIO, meliputi: analisis PDRB menurut sektor, analisis supply dan demand, analisis struktur output, dll;</li>
+                    <li> Analisis keterkaitan, meliputi: keterkaitan antar sektor dalam perekonomian, backward linkage, forward linkage, dan sektor unggulan; </li>
+                    <li> Analisis Multiplier Effect, meliputi: analisis pengganda output pendapatan, dan tenaga kerja; </li>
+                    <li> Analisis Machine Learning untuk aglomerasi dan klustering sektor usaha dari wilayah provinsi di Indonesia; serta </li>
+                    <li> Chatbot yang memudahkan pencarian informasi seputar ekonomi regional. </li></ul></div>''', unsafe_allow_html=True)
         st.markdown('<div style="text-align: justify"></div>', unsafe_allow_html=True)
 
+        st.markdown('''
+            <p style="display:inline-block;font-weight: 700"><strong>We are </strong><img src="https://raw.githubusercontent.com/ANOVAsion/IRIOdashboard/main/img/anovation-logo.png" style="max-height:100px; width:auto;"> <strong>Team</strong></p>
+            <table>
+                <tr>
+                    <td>
+                        <a target="_blank" href="https://www.linkedin.com/in/alfanugraha/">
+                            <img src="https://raw.githubusercontent.com/ANOVAsion/IRIOdashboard/main/img/team/dev-alfa.jpg" style="max-height:100px; width:auto; display:block;">
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank" href="https://www.linkedin.com/in/dhea-dewanti">
+                            <img src="https://raw.githubusercontent.com/ANOVAsion/IRIOdashboard/main/img/team/dev-dhea.jpg" style="max-height:100px; width:auto; display:block;">
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank" href="https://linkedin/com/in/nurkhamidah">
+                            <img src="https://raw.githubusercontent.com/ANOVAsion/IRIOdashboard/main/img/team/dev-mida.jpg" style="max-height:100px; width:auto; display:block;">
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank" href="https://www.linkedin.com/in/teguhprasetyo08">
+                            <img src="https://raw.githubusercontent.com/ANOVAsion/IRIOdashboard/main/img/team/dev-teguh.jpg" style="max-height:100px; width:auto; display:block;">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Alfa Nugraha P</td>
+                    <td>Dhea Dewanti</td>
+                    <td>Nur Khamidah</td>
+                    <td>Teguh Prasetyo</td>
+                </tr>
+            </table>
+        ''', unsafe_allow_html=True)
+
     with home_col1c:
-        'Detail informasi dari masing-masing tab pada Dashboard Tabel IO ini aadalah sebagai berikut:'
+        'Detail informasi dari masing-masing tab pada Dashboard Tabel IRIO ini aadalah sebagai berikut:'
         st.info('**Home**: Berisi informasi umum dari fitur-fitur yang tersedia dalam dashboard.')
         st.info('**About**: Berisi informasi umum dari kontributor dashboard.')
         st.info('**PDRB**: Berisi tabel dan visualisasi interaktif dari kontribusi ekonomi masing-masing dari 34 provinsi di Indonesia berdasarkan nilai PDRB tahun 2016 dari berbagai sektor/industri berdasarkan tabel IRIO BPS tahun 2016.')
@@ -67,34 +108,6 @@ if page == 'home':
         st.info('**Simulasi Pengganda**: Berisi tabel interaktif simulasi sederhana untuk memperoleh total nilai PDRB dari 34 provinsi di Indonesia berdasarkan nilai masukan yang ditentukan pengguna berdasarkan tabel IRIO BPS tahun 2016.')
         st.info('**Model Klasterisasi**: Berisi tabel dan visualisasi interaktif dari klasterisasi 34 provinsi di Indonesia berdasarkan berbagai sektor menggunakan model ML (machine learning).')
         st.info('**Chatbot**: Berisi fitur chatbot untuk memudahkan pengambilan informasi dan interpretasi dari statistik ekonomi dari tabel IO 34 provinsi di Indonesia atau informasi lainnya yang relevan.')
-
-## ------------------------------ TAB ABOUT ------------------------------
-if page == 'about':
-    st.header('ANOVAsion Team')
-    
-    p1, p2, p3, p4, p5, p6, p7, p8, p9 = st.columns([2,1,1,1,1,1,1,1,2])
-    with p1, p3, p5, p7, p9:
-        st.write("")
-    with p8:
-        st.image("img/team/dev-dhea.jpg")
-        st.markdown(
-            """<div style="text-align: center"> <a href="https://www.linkedin.com/in/dhea-dewanti?originalSubdomain=id/">Dhea Dewanti</a></div>""", unsafe_allow_html=True,
-        )
-    with p6:
-        st.image("img/team/dev-mida.jpg")
-        st.markdown(
-            """<div style="text-align: center"><a href="https://linkedin/com/in/nurkhamidah">Nur Khamidah</a></div>""", unsafe_allow_html=True,
-        )
-    with p2:
-        st.image("img/team/dev-alfa.jpg")
-        st.markdown(
-            """<div style="text-align: center"> <a href="https://www.linkedin.com/in/alfanugraha/">Alfa Nugraha P</a></div>""", unsafe_allow_html=True,
-        )
-    with p4:
-        st.image("img/team/dev-teguh.jpg")
-        st.markdown(
-            """<div style="text-align: center"><a href="https://www.linkedin.com/in/teguhprasetyo08/">Teguh Prasetyo</a></div>""", unsafe_allow_html=True,
-        )
     
 ## ------------------------------ TAB PDRB ------------------------------
 if page == 'pdrb':
